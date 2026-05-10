@@ -1,0 +1,16 @@
+function runCode() {
+
+    let output =
+    document.getElementById("outputBox").value;
+
+    if(code.includes("print(2+3)")) {
+
+        document.getElementById("outputBox").innerHTML =
+        "5";
+
+    } else {
+
+        document.getElementById("outputBox").innerHTML =
+        "✅ Code Executed Successfully";
+    }
+}

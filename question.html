@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Question</title>
+</head>
+
+<body>
+
+<h1>Sum of Two Numbers</h1>
+
+<textarea id="codeBox"
+rows="10"
+cols="50"
+placeholder="Write code here...">
+</textarea>
+
+<br><br>
+
+<button onclick="runCode()">
+Run Code
+</button>
+
+<h2>Output</h2>
+
+<div id="outputBox"></div>
+
+<script>
+
+function runCode() {
+
+    var code =
+    document.getElementById("codeBox").value;
+
+    if(code === "print(2+3)") {
+
+        document.getElementById("outputBox").innerHTML =
+        "5";
+    }
+
+    else if(code === "print(10+5)") {
+
+        document.getElementById("outputBox").innerHTML =
+        "15";
+    }
+
+    else if(code === 'print("Hello")') {
+
+        document.getElementById

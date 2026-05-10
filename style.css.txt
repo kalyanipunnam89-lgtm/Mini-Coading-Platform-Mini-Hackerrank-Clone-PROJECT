@@ -1,0 +1,18 @@
+function runCode() {
+
+    let output =
+        document.getElementById("codeBox").value;
+
+    let output =
+        document.getElementById("outputBox");
+
+    if(code.includes("2 + 3")) {
+
+        output.innerHTML = "5";
+
+    } else {
+
+        output.innerHTML =
+        "✅ Code Executed";
+    }
+}

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini Hackathon</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #0f172a;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00ffb3;
+            padding: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        #container {
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        #left {
+            width: 30%;
+            background: #111827;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        #right {
+            width: 70%;
+            background: #111827;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        li {
+            cursor: pointer;
+            margin: 8px 0;
+            color: #00ffb3;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            background: #1f2937;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background: #00ffb3;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        pre {
+            background: #1f2937;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #app { display: none; }
+    </style>
+</head>
+
+<body>
+
+<h1>🚀 Mini Hackathon</h1>
+
+<!-- LOGIN -->
+<div id="login" style="text-align:center;">
+    <h2>Login</h2>
+    <input type="text" id="name" placeholder="Enter Name"><br><br>
+    <button onclick="login()">Enter</button>
+</div>
+
+<!-- APP -->
+<div id="app">
+
+<div id="container">
+
+    <!-- LEFT -->
+    <div id="left">
+        <h3>📌 Problems</h3>
+        <ul>
+            <li onclick="loadProblem(0)">1. Add Two Numbers</li>
+            <li onclick="loadProblem(1)">2. Even or Odd</li>
+        </ul>
+
+        <h3>🏆 Leaderboard</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody id="board"></tbody>
+        </table>
+    </div>
+
+    <!-- RIGHT -->
+    <div id="right">
+        <h3>Welcome, <span id="user"></span></h3>
+
+        <h3 id="problemTitle">Select a problem</h3>
+
+        <p id="problemDesc"></p>
+
+        <textarea id="code" placeholder="Write JS code here"></textarea>
+
+        <button onclick="runCode()">Run Code</button>
+
+        <h3>Output:</h3>
+        <pre id="output"></pre>
+    </div>
+
+</div>
+
+</div>
+
+<script>
+
+let users = [];
+let currentUser = "";
+
+// Problems
+let problems = [
+    {
+        title: "Add Two Numbers",
+        desc: "Write code: console.log(2+3)",
+        expected: 5
+    },
+    {
+        title: "Even or Odd",
+        desc: "Write code: console.log(4%2)",
+        expected: 0
+    }
+];
+
+let currentProblem = null;
+
+/* LOGIN */
+function login() {
+    let name = document.getElementById("name").value;
+
+    if (name === "") return alert("Enter name");
+
+    currentUser = name;
+
+    let exist = users.find(u => u.name === name);
+    if (!exist) {
+        users.push({name: name, score: 0});
+    }
+
+    document.getElementById("login").style.display = "none";
+    document.getElementById("app").style.display = "block";
+
+    document.getElementById("user").innerText = name;
+
+    updateLeaderboard();
+}
+
+/* LOAD PROBLEM */
+function loadProblem(index) {
+    currentProblem = problems[index];
+
+    document.getElementById("problemTitle").innerText = currentProblem.title;
+    document.getElementById("problemDesc").innerText = currentProblem.desc;
+}
+
+/* RUN CODE */
+function runCode() {
+    let code = document.getElementById("code").value;
+
+    try {
+        let result = eval(code);
+        document.getElementById("output").innerText = result;
+
+        // CHECK ANSWER
+        if (currentProblem && result == currentProblem.expected) {
+            addScore(10);
+        }
+
+    } catch (err) {
+        document.getElementById("output").innerText = err;
+    }
+}
+
+/* SCORE */
+function addScore(points) {
+    let user = users.find(u => u.name === currentUser);
+
+    if (user) {
+        user.score += points;
+    }
+
+    updateLeaderboard();
+}
+
+/* LEADERBOARD */
+function updateLeaderboard() {
+    users.sort((a,b) => b.score - a.score);
+
+    let html = "";
+
+    users.forEach((u,i) => {
+        html += `
+        <tr>
+            <td>${i+1}</td>
+            <td>${u.name}</td>
+            <td>${u.score}</td>
+        </tr>`;
+    });
+
+    document.getElementById("board").innerHTML = html;
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Mini Coding Platform</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="login-box" id="loginBox">
+
+    <h2>Student Login</h2>
+
+    <input type="text"
+    id="name"
+    placeholder="Enter Name">
+
+    <input type="text"
+    id="mobile"
+    placeholder="Enter Mobile Number">
+
+    <button onclick="login()">
+        Login
+    </button>
+
+</div>
+
+<div class="dashboard" id="dashboard">
+
+    <div class="header">
+        Welcome to Coding Platform
+    </div>
+
+    <h3 id="welcome"></h3>
+
+    <div class="search-box">
+
+        <input type="text"
+        id="search"
+        placeholder="Search Problems..."
+        onkeyup="searchProduct()">
+
+    </div>
+
+    <div id="productList">
+
+        <div class="product">
+            <a href="/question">
+                🧮 Sum of Two Numbers
+            </a>
+        </div>
+
+        <div class="product">
+            🔄 Reverse String
+        </div>
+
+        <div class="product">
+            🔁 Palindrome Check
+        </div>
+
+        <div class="product">
+            📊 Array Traversal
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

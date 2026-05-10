@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fibonacci Problem</title>
+</head>
+
+<body>
+
+<h1>Fibonacci Series</h1>
+
+<textarea id="code" rows="10" cols="50">
+a = 0
+b = 1
+
+for i in range(5):
+    print(a)
+    c = a + b
+    a = b
+    b = c
+</textarea>
+
+<br><br>
+
+<button onclick="runCode()">Run</button>
+
+<h2 id="output"></h2>
+
+<script>
+
+function runCode(){
+
+    document.getElementById("output").innerHTML =
+    "0 1 1 2 3";
+
+}
+
+</script>
+
+</body>
+
+</html>

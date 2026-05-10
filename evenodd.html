@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Even Odd Problem</title>
+</head>
+
+<body>
+
+<h1>Even Odd Check</h1>
+
+<textarea id="code" rows="10" cols="50">
+n = 10
+
+if n % 2 == 0:
+    print("Even")
+else:
+    print("Odd")
+</textarea>
+
+<br><br>
+
+<button onclick="runCode()">Run</button>
+
+<h2 id="output"></h2>
+
+<script>
+
+function runCode(){
+
+    let code = document.getElementById("code").value;
+
+    if(code.includes("Even")){
+        document.getElementById("output").innerHTML = "Even";
+    }
+    else{
+        document.getElementById("output").innerHTML = "Odd";
+    }
+}
+
+</script>
+
+</body>
+
+</html>
